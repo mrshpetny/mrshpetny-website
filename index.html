@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Audit Protocol – Mr. Shpetny</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="favicon.png">
+    <style>
+        * { box-sizing: border-box; }
+        body {
+            background-color: #f5f5f5;
+            display: flex;
+            justify-content: center;
+            padding: 2rem 1rem;
+            font-family: 'Inter', -apple-system, sans-serif;
+            margin: 0;
+        }
+        .document {
+            background: #ffffff;
+            max-width: 800px;
+            width: 100%;
+            padding: 2.5rem 2.5rem 2rem;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.04);
+            border: 1px solid #e0e0e0;
+            border-radius: 6px;
+        }
+
+        /* -- Letterhead Header -- */
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-bottom: 1.5rem;
+            border-bottom: 2px solid #0b1f33;
+            margin-bottom: 2.5rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 1.2rem;
+        }
+        .header-left img {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #e5e7eb;
+        }
+        .header-left h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin: 0 0 0.1rem 0;
+            color: #0b1f33;
+        }
+        .header-left .subtitle {
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: #4b5563;
+            margin: 0;
+        }
+        .header-right {
+            text-align: right;
+            font-size: 0.85rem;
+            color: #4b5563;
+            line-height: 1.5;
+        }
+        .header-right .domain {
+            font-weight: 600;
+            color: #0b1f33;
+        }
+
+        /* -- Sections -- */
+        .section {
+            margin-bottom: 2.2rem;
+        }
+        .section-title {
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: #6b7280;
+            border-bottom: 1px solid #e5e7eb;
+            padding-bottom: 0.5rem;
+            margin-bottom: 1rem;
+        }
+        .primary-statement {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin: 1rem 0 0.4rem 0;
+            color: #0b1f33;
+            line-height: 1.3;
+        }
+        .fine-print {
+            font-size: 0.9rem;
+            color: #4b5563;
+            margin-top: 0.3rem;
+            line-height: 1.7;
+        }
+
+        p, ul {
+            color: #1f2937;
+            margin: 0.4rem 0;
+            line-height: 1.6;
+        }
+        ul {
+            list-style: none;
+            padding-left: 0;
+            margin: 0.6rem 0;
+        }
+        ul li {
+            margin-bottom: 0.3rem;
+            padding-left: 1.2rem;
+            position: relative;
+            font-size: 0.95rem;
+        }
+        ul li::before {
+            content: "·";
+            position: absolute;
+            left: 0;
+            color: #0b1f33;
+            font-weight: 700;
+        }
+        strong {
+            font-weight: 600;
+            color: #0b1f33;
+        }
+
+        /* -- Process List -- */
+        .process-list {
+            list-style: none;
+            padding: 0;
+            margin: 1.2rem 0 0.5rem;
+        }
+        .process-list li {
+            display: flex;
+            gap: 1rem;
+            padding: 0.7rem 0;
+            border-bottom: 1px solid #f0f0f0;
+            align-items: flex-start;
+        }
+        .process-list li:last-child { border-bottom: none; }
+        .process-list .step {
+            font-weight: 600;
+            color: #0b1f33;
+            min-width: 2.2rem;
+            font-size: 0.95rem;
+        }
+        .process-list .content {
+            color: #4b5563;
+            font-size: 0.95rem;
+        }
+        .process-list .content strong {
+            font-weight: 600;
+            color: #1f2937;
+        }
+        .process-list .badge {
+            display: inline-block;
+            background: #f3f4f6;
+            padding: 0.1rem 0.5rem;
+            border-radius: 3px;
+            font-size: 0.7rem;
+            font-weight: 500;
+            color: #4b5563;
+            margin-top: 0.1rem;
+        }
+
+        /* -- Diagnostic Table -- */
+        .diagnostic-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+            margin: 0.8rem 0;
+        }
+        .diagnostic-table td {
+            padding: 0.4rem 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        .diagnostic-table tr:last-child td { border-bottom: none; }
+        .diagnostic-table .label { color: #1f2937; }
+        .diagnostic-table .value { text-align: right; font-weight: 500; color: #0b1f33; }
+        .diagnostic-table .total-row td {
+            padding-top: 0.8rem;
+            border-top: 2px solid #0b1f33;
+            font-weight: 600;
+            color: #0b1f33;
+        }
+
+        /* -- Footer -- */
+        .footer {
+            border-top: 2px solid #0b1f33;
+            padding-top: 1.5rem;
+            margin-top: 2.5rem;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1rem;
+            font-size: 0.85rem;
+            color: #4b5563;
+        }
+        .footer a {
+            color: #0b1f33;
+            text-decoration: none;
+            border-bottom: 1px solid #0b1f33;
+        }
+
+        @media (max-width: 600px) {
+            .document { padding: 1.5rem; }
+            .header { flex-direction: column; align-items: flex-start; }
+            .header-right { text-align: left; width: 100%; }
+            .process-list li { flex-direction: column; gap: 0.2rem; }
+            .footer { flex-direction: column; align-items: flex-start; }
+        }
+    </style>
+</head>
+<body>
+    <div class="document">
+
+        <!-- HEADER -->
+        <div class="header">
+            <div class="header-left">
+                <img src="https://github.com/mrshpetny.png" alt="Mr. Shpetny">
+                <div>
+                    <h1>Mr. Shpetny</h1>
+                    <div class="subtitle">CEO &amp; Cloud Cost Auditor</div>
+                </div>
+            </div>
+            <div class="header-right">
+                <span class="domain">mrshpetny.com</span><br>
+                <span style="font-size: 0.7rem; color: #6b7280;">California, USA</span>
+            </div>
+        </div>
+
+        <!-- 1. PROTOCOL -->
+        <div class="section">
+            <div class="section-title">Audit Protocol</div>
+            <ul class="process-list">
+                <li>
+                    <span class="step">01.</span>
+                    <span class="content"><strong>Pass Qualification</strong><br>Answer the qualification questions.</span>
+                </li>
+                <li>
+                    <span class="step">02.</span>
+                    <span class="content"><strong>Sign the Agreement</strong><br>Review and execute the binding contract.</span>
+                </li>
+                <li>
+                    <span class="step">03.</span>
+                    <span class="content"><strong>Pay the Audit Fee</strong><br>Send the Audit Fee (starting at $2,500 USDT) to the provided wallet address.</span>
+                </li>
+                <li>
+                    <span class="step">04.</span>
+                    <span class="content"><strong>Grant Read‑Only Access</strong><br>Share your IAM read-only credentials for the audit.</span>
+                </li>
+                <li>
+                    <span class="step">05.</span>
+                    <span class="content"><strong>Receive the Report</strong><br>The final report is delivered within 72 hours.</span>
+                </li>
+            </ul>
+            <!-- Consolidated Conditions -->
+            <div style="margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid #f0f0f0; font-size: 0.9rem; color: #4b5563; line-height: 1.6;">
+                <strong style="color: #1f2937;">Timeline &amp; Conditions:</strong><br>
+                You may cancel the agreement within 24 hours of signing for a full refund. Access must be provided within 3 business days of signing.
+                Failure to provide access within 3 business days will terminate the audit and retain the fee.
+                The 72‑hour delivery clock starts immediately after valid access is granted and the cancellation window has expired.
+            </div>
+        </div>
+
+        <!-- 2. DELIVERY & OUTCOME -->
+        <div class="section">
+            <div class="section-title">Delivery &amp; Outcome</div>
+            <p><strong>Full AWS infrastructure audit delivered within 72 hours:</strong></p>
+            <ul>
+                <li>Forensic report detailing <strong>monthly waste</strong> across EC2, EBS, RDS, NAT, and VPC.</li>
+                <li>Implementation instructions (CLI/Console) designed for your dev team to apply in <strong>&lt;1 hour of dev time</strong>.</li>
+                <li><strong>Direct P&amp;L improvement:</strong> Minimum $6,000 per year (annualized from the $500/month guarantee).</li>
+            </ul>
+        </div>
+
+        <!-- 3. GUARANTEE -->
+        <div class="section">
+            <div class="section-title">Guarantee</div>
+            <div style="color: #1f2937; line-height: 1.6; margin: 0;">
+                <p style="margin: 0 0 0.2rem 0;">
+                    <strong style="color: #0b1f33;">At least $500/month waste found.</strong> Full refund issued if not identified. Refund processed automatically via USDT (TRC-20) within 5 business days.
+                </p>
+            </div>
+        </div>
+
+        <!-- 4. DIAGNOSTIC ANATOMY -->
+        <div class="section">
+            <div class="section-title">Waste Profile</div>
+            <div class="fine-print" style="margin-bottom: 0.3rem;">Typical waste anatomy (standard $10k–$15k/mo AWS bill)</div>
+            <table class="diagnostic-table">
+                <tr><td class="label">Idle EC2 Instances (3x t3.medium, running 24/7, &lt;5% CPU)</td><td class="value">$351.36/mo</td></tr>
+                <tr><td class="label">Unattached EBS Volumes (5x gp3 500GB, no Attachment)</td><td class="value">$192.50/mo</td></tr>
+                <tr><td class="label">Idle NAT Gateway (1x, &lt;50 MB outbound)</td><td class="value">$37.20/mo</td></tr>
+                <tr><td class="label">Over‑provisioned RDS (db.m5.large, CPU &lt;10%, 300GB gp3)</td><td class="value">$199.84/mo</td></tr>
+                <tr><td class="label">Orphaned Snapshots (Age &gt; 60 days, 1.45TB total)</td><td class="value">$74.52/mo</td></tr>
+                <tr><td class="label">Unused Elastic IPs (3x, no attachment)</td><td class="value">$10.80/mo</td></tr>
+                <tr><td class="label">Idle ALB (Application Load Balancer, no traffic, 1x)</td><td class="value">$117.60/mo</td></tr>
+                <tr><td class="label">Unused CloudWatch Logs (retention &gt; 30 days, 120GB storage)</td><td class="value">$48.40/mo</td></tr>
+                <tr><td class="label">Underutilized EBS‑optimized instances (2x m5.large, &lt;20% utilization)</td><td class="value">$153.80/mo</td></tr>
+                <tr class="total-row"><td class="label">Total potential savings (typical)</td><td class="value">~$1,186 / month</td></tr>
+            </table>    
+            <div style="margin-top: 0.4rem; font-size: 0.85rem; color: #4b5563; line-height: 1.7;">
+                The $500 guarantee is the contractual minimum. Typical identified waste consistently exceeds this floor. Actionable CLI commands and console steps are detailed in the final report.
+            </div>
+        </div>
+
+        <!-- 5. METHODOLOGY NOTE -->
+        <div class="section">
+            <div class="section-title">Methodology Note</div>
+            <p style="font-size: 0.9rem; color: #4b5563;">Figures are based on standard AWS public pricing.</p>
+        </div>
+
+        <!-- FOOTER -->
+        <div class="footer">
+            <div>
+                <a href="mailto:alexey.shpetny.official@gmail.com">alexey.shpetny.official@gmail.com</a><br>
+                <span style="display:block; margin-top:0.4rem; color:#6b7280;">mrshpetny.com</span>
+            </div>
+            <div style="font-size: 0.7rem; color: #6b7280;">
+                © 2026 IE Mr. Shpetny. All rights reserved.
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>
