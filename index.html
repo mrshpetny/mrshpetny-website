@@ -273,9 +273,9 @@
         <div class="section">
             <div class="section-title">Waste Findings</div>
             <p style="font-size: 0.9rem; color: #4b5563; margin-bottom: 0.5rem;">
-                Patterns we found in standard AWS accounts ($10k–$15k monthly spend).
+                What we typically find per audit across standard AWS environments ($10k–$15k monthly spend).
             </p>
-               <table class="diagnostic-table">
+            <table class="diagnostic-table">
                 <tr><td class="label">Idle EC2 Instances (3x t3.medium, running 24/7, &lt;5% CPU)</td><td class="value">$351.36/mo</td></tr>
                 <tr><td class="label">Unattached EBS Volumes (5x gp3 500GB, no Attachment)</td><td class="value">$192.50/mo</td></tr>
                 <tr><td class="label">Idle NAT Gateway (1x, &lt;50 MB outbound)</td><td class="value">$37.20/mo</td></tr>
@@ -285,8 +285,11 @@
                 <tr><td class="label">Idle ALB (Application Load Balancer, no traffic, 1x)</td><td class="value">$117.60/mo</td></tr>
                 <tr><td class="label">Unused CloudWatch Logs (retention &gt; 30 days, 120GB storage)</td><td class="value">$48.40/mo</td></tr>
                 <tr><td class="label">Underutilized EBS‑optimized instances (2x m5.large, &lt;20% utilization)</td><td class="value">$153.80/mo</td></tr>
-                <tr class="total-row"><td class="label">Total potential savings (typical)</td><td class="value">~$1,186/mo</td></tr>
+                <tr class="total-row"><td class="label">Savings per audit (typical)</td><td class="value">~$1,186/mo</td></tr>
             </table>
+            <p style="font-size: 0.9rem; color: #4b5563; margin-bottom: 0.8rem;">
+                Audit will cover all accounts you specify definting scope – the savings shown are for the entire scope.
+            </p>
         </div>
 
         <!-- 6. AUDIT PROTOCOL -->
